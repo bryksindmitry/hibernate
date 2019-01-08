@@ -5,8 +5,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class CreateStudentDemo {
-    public static void main(String args[]){
+public class PrimaryKeyDemo {
+    public static void main(String[] args){
         // create ssession factory
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -19,15 +19,20 @@ public class CreateStudentDemo {
 
         try{
             // use the session object to Save java object.
-            System.out.println("Creating new student object...");
+            System.out.println("Creating 3 students object...");
 
             // create a student object
-            Student tempStudent = new Student("Paul", "Wall", "Paul@mail.ru");
+            Student tempStudent = new Student("John", "Doe", "John@mail.ru");
+            Student tempStudent2 = new Student("Mary", "Public", "Mary@mail.ru");
+            Student tempStudent3 = new Student("Bonita", "Appleb", "Bonita@mail.ru");
+
             //start a transaction
             session.beginTransaction();
             // save the student object
-            System.out.println(" Saving the student...");
+            System.out.println(" Saving the students...");
             session.save(tempStudent);
+            session.save(tempStudent2);
+            session.save(tempStudent3);
             // commit transaction
             session.getTransaction().commit();
 
@@ -36,6 +41,8 @@ public class CreateStudentDemo {
         finally {
             factory.close();
         }
+
+
 
     }
 }
